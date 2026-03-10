@@ -1,19 +1,17 @@
 "use client";
 
-import { useState } from "react";
 import {
-  Zap,
-  Puzzle,
-  Globe,
-  Bot,
-  BarChart2,
+  CreditCard,
   RefreshCw,
-  Brain,
-  GitBranch,
-  Terminal,
   Shield,
+  Globe,
+  BarChart2,
+  Zap,
+  Lock,
   CheckCircle2,
   ArrowRight,
+  Server,
+  TrendingUp,
 } from "lucide-react";
 import { Navbar } from "@/components/navbar";
 import { Footer } from "@/components/footer";
@@ -24,98 +22,116 @@ import { useInView } from "@/hooks/use-in-view";
 
 const bigFeatures = [
   {
-    id: "ai-codegen",
-    badge: "AI Code Generation",
-    headline: "Write code at the speed of thought.",
+    id: "payments",
+    badge: "Payments",
+    headline: "The world's most powerful payments platform.",
     description:
-      "Mocha's AI model understands your entire project — not just the open file. It predicts what you need next and delivers it inline, in natural language, or as multi-file diffs.",
+      "Stripe's payments product combines best-in-class authorization rates with the broadest support for payment methods, adaptive UIs, and smart fraud prevention — all in one integration.",
     subFeatures: [
-      "Context-aware completion",
-      "Multi-file edits",
-      "Natural language to code",
-      "Inline refactoring",
+      "Auth optimization with ML",
+      "100+ payment methods",
+      "Adaptive pricing for local currencies",
+      "Smart retries for failed charges",
     ],
     visual: (
-      <div className="rounded-xl bg-black/[0.03] border border-black/[0.06] font-mono text-[13px] leading-relaxed p-5 space-y-1.5 select-none">
+      <div className="rounded-xl border border-[#e7ecf1] font-mono text-[13px] leading-relaxed p-5 space-y-3 select-none bg-white shadow-[0_6px_12px_-2px_rgba(50,50,93,0.1)]">
         <div className="flex items-center gap-2 mb-3">
           <span className="w-3 h-3 rounded-full bg-red-400/60" />
           <span className="w-3 h-3 rounded-full bg-yellow-400/60" />
           <span className="w-3 h-3 rounded-full bg-green-400/60" />
-          <span className="ml-2 text-xs text-black/30">editor.tsx</span>
+          <span className="ml-2 text-xs" style={{ color: "#8c9eb1" }}>
+            payment_intent.js
+          </span>
         </div>
         <p>
-          <span className="text-purple-500">async function</span>{" "}
-          <span className="text-blue-600">fetchUser</span>
-          <span className="text-black/60">(id: string) {"{"}</span>
-        </p>
-        <p className="pl-4 text-black/50">{"// ← Mocha auto-completes below"}</p>
-        <p className="pl-4">
-          <span className="text-purple-500">const</span>{" "}
-          <span className="text-black/70">res</span>{" "}
-          <span className="text-black/50">= await</span>{" "}
-          <span className="text-blue-600">fetch</span>
-          <span className="text-black/60">(`/api/users/${"{id}"}`)</span>
-        </p>
-        <p className="pl-4">
-          <span className="text-purple-500">if</span>{" "}
-          <span className="text-black/60">(!res.ok)</span>{" "}
-          <span className="text-purple-500">throw new</span>{" "}
-          <span className="text-blue-600">Error</span>
-          <span className="text-black/60">(res.statusText)</span>
+          <span style={{ color: "#635bff" }}>const</span>{" "}
+          <span style={{ color: "#0a2540" }}>intent</span>{" "}
+          <span style={{ color: "#8c9eb1" }}>=</span>{" "}
+          <span style={{ color: "#425466" }}>await</span>{" "}
+          <span style={{ color: "#0a2540" }}>stripe</span>
+          <span style={{ color: "#8c9eb1" }}>.</span>
+          <span style={{ color: "#635bff" }}>paymentIntents</span>
+          <span style={{ color: "#8c9eb1" }}>.</span>
+          <span style={{ color: "#0a2540" }}>create</span>
+          <span style={{ color: "#8c9eb1" }}>{"({"}</span>
         </p>
         <p className="pl-4">
-          <span className="text-purple-500">return</span>{" "}
-          <span className="text-black/60">res.json()</span>
+          <span style={{ color: "#8c9eb1" }}>amount:</span>{" "}
+          <span style={{ color: "#635bff" }}>2000</span>
+          <span style={{ color: "#8c9eb1" }}>,</span>
         </p>
-        <p className="text-black/60">{"}"}</p>
-        <div className="mt-3 px-3 py-2 rounded-lg bg-indigo-50 border border-indigo-100 text-xs text-indigo-600">
-          ✦ Mocha generated 4 lines from context
+        <p className="pl-4">
+          <span style={{ color: "#8c9eb1" }}>currency:</span>{" "}
+          <span style={{ color: "#0a2540" }}>&apos;usd&apos;</span>
+          <span style={{ color: "#8c9eb1" }}>,</span>
+        </p>
+        <p className="pl-4">
+          <span style={{ color: "#8c9eb1" }}>
+            automatic_payment_methods:
+          </span>{" "}
+          <span style={{ color: "#8c9eb1" }}>{"{ enabled:"}</span>{" "}
+          <span style={{ color: "#635bff" }}>true</span>{" "}
+          <span style={{ color: "#8c9eb1" }}>{"}"}</span>
+        </p>
+        <p>
+          <span style={{ color: "#8c9eb1" }}>{"})"}</span>
+        </p>
+        <div
+          className="mt-3 px-3 py-2 rounded-lg text-xs"
+          style={{
+            background: "#635bff10",
+            border: "1px solid #635bff30",
+            color: "#635bff",
+          }}
+        >
+          ✓ Payment created · 98.7% auth rate
         </div>
       </div>
     ),
   },
   {
-    id: "agentic",
-    badge: "Agentic Workflows",
-    headline: "Delegate entire tasks to your AI agent.",
+    id: "billing",
+    badge: "Billing",
+    headline: "Any revenue model, zero complexity.",
     description:
-      "Stop writing code line by line. Describe what you want at a high level, and Mocha's agent plans, executes, tests, and iterates — autonomously — until the job is done.",
+      "Stripe Billing handles any pricing model — flat rate, usage-based, tiered, per-seat — with smart dunning, proration, revenue recognition, and automatic tax collection built in.",
     subFeatures: [
-      "Task decomposition",
-      "Autonomous debugging",
-      "Test generation",
-      "PR descriptions",
+      "Usage-based billing",
+      "Flat-rate and tiered pricing",
+      "Smart dunning & retries",
+      "Revenue recognition (ASC 606)",
     ],
     visual: (
-      <div className="rounded-xl bg-black/[0.03] border border-black/[0.06] text-[13px] p-5 space-y-3 select-none">
-        <div className="flex items-center gap-2 mb-1">
-          <Bot className="w-4 h-4 text-indigo-500" strokeWidth={1.5} />
-          <span className="text-xs font-medium text-black/50">Mocha Agent</span>
-          <span className="ml-auto text-xs px-2 py-0.5 rounded-full bg-green-100 text-green-700">Running</span>
+      <div
+        className="rounded-xl border border-[#e7ecf1] p-5 space-y-4 select-none bg-white shadow-[0_6px_12px_-2px_rgba(50,50,93,0.1)]"
+      >
+        <div className="flex items-center justify-between mb-2">
+          <span className="text-sm font-semibold" style={{ color: "#0a2540" }}>
+            Subscription Overview
+          </span>
+          <span
+            className="text-xs px-2.5 py-0.5 rounded-full font-medium"
+            style={{ background: "#e8fce9", color: "#1a7f37" }}
+          >
+            Active
+          </span>
         </div>
         {[
-          { done: true, text: "Analyze failing test suite" },
-          { done: true, text: "Identify root cause in auth middleware" },
-          { done: true, text: "Apply fix across 3 files" },
-          { done: false, text: "Re-run tests to verify fix…" },
-        ].map((step) => (
-          <div key={step.text} className="flex items-start gap-2.5">
-            <div
-              className={cn(
-                "mt-0.5 w-4 h-4 rounded-full flex-shrink-0 flex items-center justify-center",
-                step.done
-                  ? "bg-green-100 text-green-600"
-                  : "bg-black/5 text-black/20 animate-pulse"
-              )}
-            >
-              {step.done ? (
-                <CheckCircle2 className="w-3 h-3" />
-              ) : (
-                <span className="w-1.5 h-1.5 rounded-full bg-current" />
-              )}
-            </div>
-            <span className={cn("leading-tight", step.done ? "text-black/60" : "text-black/80 font-medium")}>
-              {step.text}
+          { label: "MRR", value: "$12,480" },
+          { label: "Active subscribers", value: "1,247" },
+          { label: "Churn rate", value: "1.8%" },
+          { label: "Next renewal", value: "Apr 1, 2026" },
+        ].map((row) => (
+          <div
+            key={row.label}
+            className="flex items-center justify-between py-2 border-b"
+            style={{ borderColor: "#e7ecf1" }}
+          >
+            <span className="text-xs" style={{ color: "#8c9eb1" }}>
+              {row.label}
+            </span>
+            <span className="text-sm font-medium" style={{ color: "#0a2540" }}>
+              {row.value}
             </span>
           </div>
         ))}
@@ -123,110 +139,117 @@ const bigFeatures = [
     ),
   },
   {
-    id: "ide",
-    badge: "Deep IDE Integration",
-    headline: "Feels native. Works everywhere.",
+    id: "radar",
+    badge: "Radar",
+    headline: "Stop fraud before it costs you.",
     description:
-      "Mocha is built from the ground up for macOS. Every AI feature is woven into the editor's fabric — not bolted on as an afterthought. Git, the terminal, the file tree: all AI-aware.",
+      "Radar uses machine learning trained on hundreds of billions of data points from across the Stripe network to block fraudulent payments — without blocking legitimate customers.",
     subFeatures: [
-      "File tree awareness",
-      "Git integration",
-      "Terminal access",
-      "Extensions support",
+      "ML fraud detection at scale",
+      "Custom rules engine",
+      "3D Secure orchestration",
+      "Chargeback protection",
     ],
     visual: (
-      <div className="rounded-xl bg-black/[0.03] border border-black/[0.06] text-[13px] overflow-hidden select-none">
-        {/* Title bar */}
-        <div className="flex items-center gap-2 px-4 py-3 border-b border-black/[0.06]">
-          <span className="w-3 h-3 rounded-full bg-red-400/60" />
-          <span className="w-3 h-3 rounded-full bg-yellow-400/60" />
-          <span className="w-3 h-3 rounded-full bg-green-400/60" />
-          <span className="ml-3 text-xs text-black/30">mocha-workspace</span>
-        </div>
-        <div className="flex">
-          {/* Sidebar */}
-          <div className="w-36 border-r border-black/[0.06] p-3 space-y-1 font-mono">
-            {[
-              { name: "src/", indent: 0, open: true },
-              { name: "app/", indent: 1, open: true },
-              { name: "page.tsx", indent: 2, active: true },
-              { name: "layout.tsx", indent: 2 },
-              { name: "components/", indent: 1 },
-              { name: "public/", indent: 0 },
-            ].map((f) => (
-              <div
-                key={f.name}
-                style={{ paddingLeft: f.indent * 12 }}
-                className={cn(
-                  "text-xs truncate py-0.5 rounded",
-                  f.active
-                    ? "text-indigo-600 font-medium bg-indigo-50 px-1"
-                    : "text-black/40"
-                )}
-              >
-                {f.name}
-              </div>
-            ))}
+      <div className="rounded-xl border border-[#e7ecf1] p-5 space-y-4 select-none bg-white shadow-[0_6px_12px_-2px_rgba(50,50,93,0.1)]">
+        <div className="flex items-center gap-3 mb-2">
+          <div
+            className="w-10 h-10 rounded-full flex items-center justify-center"
+            style={{ background: "#e8fce9" }}
+          >
+            <Shield className="w-5 h-5" style={{ color: "#1a7f37" }} strokeWidth={1.5} />
           </div>
-          {/* Editor area */}
-          <div className="flex-1 p-3 font-mono space-y-1">
-            <p className="text-black/20 text-xs">1</p>
-            <p className="text-xs">
-              <span className="text-purple-500">import</span>{" "}
-              <span className="text-black/50">{"{ Navbar }"}</span>
+          <div>
+            <p className="text-sm font-medium" style={{ color: "#0a2540" }}>
+              Radar protection active
             </p>
-            <p className="text-xs text-black/40">2</p>
-            <p className="text-xs text-black/40">3  export default function…</p>
-            <div className="mt-2 px-2 py-1.5 rounded-md bg-indigo-50 border border-indigo-100 text-xs text-indigo-600">
-              ✦ 2 AI suggestions ready
-            </div>
+            <p className="text-xs" style={{ color: "#8c9eb1" }}>
+              Updated March 2026
+            </p>
           </div>
         </div>
-        {/* Terminal strip */}
-        <div className="border-t border-black/[0.06] bg-black/[0.02] px-4 py-2 font-mono text-xs text-black/40">
-          <span className="text-green-600">$</span> pnpm dev&nbsp;
-          <span className="text-black/30">— ready on :3000</span>
-        </div>
+        {[
+          { label: "Fraud rate", value: "0.04%", ok: true },
+          { label: "Blocked today", value: "23 attempts", ok: true },
+          { label: "False positives", value: "< 0.1%", ok: true },
+          { label: "3D Secure", value: "Enabled", ok: true },
+        ].map((row) => (
+          <div
+            key={row.label}
+            className="flex items-center justify-between py-1.5 border-b last:border-0"
+            style={{ borderColor: "#e7ecf1" }}
+          >
+            <span className="text-xs" style={{ color: "#8c9eb1" }}>
+              {row.label}
+            </span>
+            <span
+              className="text-xs px-2 py-0.5 rounded-full font-medium"
+              style={{ background: "#e8fce9", color: "#1a7f37" }}
+            >
+              {row.value}
+            </span>
+          </div>
+        ))}
       </div>
     ),
   },
   {
-    id: "security",
-    badge: "Privacy & Security",
-    headline: "Your code never leaves your machine.",
+    id: "connect",
+    badge: "Connect",
+    headline: "Build the next Shopify or DoorDash.",
     description:
-      "With Mocha's local inference option, AI runs entirely on your hardware. Zero telemetry, zero training on your code. SOC 2 Type II certified for teams who need enterprise-grade assurance.",
+      "Stripe Connect powers multi-party payment platforms. Onboard merchants globally, route payments between parties, manage compliance, and pay out to bank accounts in 135+ currencies.",
     subFeatures: [
-      "Local inference option",
-      "SOC 2 compliant",
-      "No training on your code",
-      "Encrypted at rest",
+      "Multi-party payments",
+      "Custom onboarding flows",
+      "Global payouts in 135+ currencies",
+      "Embedded financial UIs",
     ],
     visual: (
-      <div className="rounded-xl bg-black/[0.03] border border-black/[0.06] p-5 space-y-4 select-none">
-        <div className="flex items-center gap-3">
-          <div className="w-10 h-10 rounded-full bg-green-100 flex items-center justify-center">
-            <Shield className="w-5 h-5 text-green-600" strokeWidth={1.5} />
-          </div>
-          <div>
-            <p className="text-sm font-medium">All systems secure</p>
-            <p className="text-xs text-black/40">Last audit: March 2026</p>
-          </div>
-        </div>
-        <div className="space-y-2">
-          {[
-            { label: "Data transmission", status: "Local only", ok: true },
-            { label: "Model training", status: "Opted out", ok: true },
-            { label: "Encryption", status: "AES-256", ok: true },
-            { label: "SOC 2 Type II", status: "Certified", ok: true },
-          ].map((row) => (
-            <div key={row.label} className="flex items-center justify-between py-1.5 border-b border-black/[0.04] last:border-0">
-              <span className="text-xs text-black/50">{row.label}</span>
-              <span className="text-xs px-2 py-0.5 rounded-full bg-green-100 text-green-700 font-medium">
-                {row.status}
+      <div className="rounded-xl border border-[#e7ecf1] p-5 space-y-3 select-none bg-white shadow-[0_6px_12px_-2px_rgba(50,50,93,0.1)]">
+        <p className="text-xs font-medium uppercase tracking-wide mb-3" style={{ color: "#8c9eb1" }}>
+          Payment flow
+        </p>
+        {[
+          { from: "Customer", amount: "$100.00", arrow: true },
+          { from: "Platform fee", amount: "−$5.00", arrow: false, muted: true },
+          { from: "Connected account", amount: "$95.00", arrow: true, highlight: true },
+        ].map((row, i) => (
+          <div key={i} className="flex items-center justify-between">
+            <div className="flex items-center gap-3">
+              <div
+                className="w-7 h-7 rounded-full flex items-center justify-center text-xs font-semibold"
+                style={{
+                  background: row.highlight ? "#635bff" : "#f6f9fc",
+                  color: row.highlight ? "white" : "#8c9eb1",
+                }}
+              >
+                {i + 1}
+              </div>
+              <span
+                className="text-sm"
+                style={{ color: row.muted ? "#8c9eb1" : "#0a2540" }}
+              >
+                {row.from}
               </span>
             </div>
-          ))}
+            <span
+              className="text-sm font-semibold"
+              style={{ color: row.muted ? "#8c9eb1" : "#0a2540" }}
+            >
+              {row.amount}
+            </span>
+          </div>
+        ))}
+        <div
+          className="mt-3 px-3 py-2 rounded-lg text-xs"
+          style={{
+            background: "#635bff10",
+            border: "1px solid #635bff30",
+            color: "#635bff",
+          }}
+        >
+          Payout scheduled · T+2 business days
         </div>
       </div>
     ),
@@ -236,41 +259,47 @@ const bigFeatures = [
 const smallFeatures = [
   {
     icon: Zap,
-    title: "Instant startup",
-    description: "Opens in under 200ms, even on massive monorepos.",
+    title: "99.999% uptime",
+    description:
+      "Enterprise-grade reliability with redundant infrastructure across multiple regions.",
   },
   {
-    icon: Puzzle,
-    title: "Plugin ecosystem",
-    description: "500+ community plugins for every workflow and language.",
+    icon: Lock,
+    title: "PCI compliant",
+    description:
+      "Stripe is a certified PCI Level 1 service provider — the highest level of certification.",
   },
   {
     icon: Globe,
-    title: "Multi-language",
-    description: "First-class support for 40+ programming languages.",
+    title: "135+ currencies",
+    description:
+      "Accept and pay out in 135+ currencies to customers and partners around the world.",
   },
   {
-    icon: Bot,
-    title: "Agent marketplace",
-    description: "Browse and install specialized AI agents in one click.",
+    icon: CreditCard,
+    title: "100+ payment methods",
+    description:
+      "Cards, bank debits, wallets, BNPL, and local payment methods in a single integration.",
+  },
+  {
+    icon: Shield,
+    title: "ML fraud detection",
+    description:
+      "Radar's models are trained on hundreds of billions of data points across the Stripe network.",
   },
   {
     icon: BarChart2,
-    title: "Usage analytics",
-    description: "Understand your coding patterns and velocity over time.",
-  },
-  {
-    icon: RefreshCw,
-    title: "Sync everywhere",
-    description: "Settings, keybindings, and themes sync across all your devices.",
+    title: "Real-time reporting",
+    description:
+      "Full visibility into revenue, refunds, disputes, and payouts from a unified dashboard.",
   },
 ];
 
 const stats = [
-  { value: "200ms", label: "Startup time" },
-  { value: "40+", label: "Languages" },
-  { value: "500+", label: "Plugins" },
-  { value: "10x", label: "Faster shipping" },
+  { value: "500M+", label: "API requests daily" },
+  { value: "10K+", label: "Requests per second" },
+  { value: "99.999%", label: "Uptime" },
+  { value: "135+", label: "Currencies" },
 ];
 
 // ─── Sub-components ──────────────────────────────────────────────────────────
@@ -291,20 +320,32 @@ function FeatureTile({
   return (
     <div
       className={cn(
-        "group rounded-2xl border border-black/[0.06] bg-white p-6 opacity-0",
-        "hover:border-black/10 hover:shadow-lg hover:shadow-black/[0.03] hover:-translate-y-1",
+        "group rounded-2xl border bg-white p-6 opacity-0",
+        "hover:-translate-y-1",
         "transition-all duration-300",
         isInView && `animate-mocha-fade-in-up stagger-${index + 1}`
       )}
+      style={{
+        borderColor: "#e7ecf1",
+        boxShadow: "0 2px 8px rgba(50,50,93,0.04)",
+      }}
     >
-      <div className="w-10 h-10 rounded-xl bg-black/[0.04] flex items-center justify-center mb-4 transition-colors duration-300 group-hover:bg-indigo-500/10">
+      <div
+        className="w-10 h-10 rounded-xl flex items-center justify-center mb-4 transition-colors duration-300"
+        style={{ background: "#635bff10" }}
+      >
         <Icon
-          className="w-5 h-5 text-black/50 transition-colors duration-300 group-hover:text-indigo-500"
+          className="w-5 h-5 transition-colors duration-300"
           strokeWidth={1.5}
+          style={{ color: "#635bff" }}
         />
       </div>
-      <h3 className="text-base font-medium text-black mb-1.5">{title}</h3>
-      <p className="text-sm text-black/45 leading-relaxed">{description}</p>
+      <h3 className="text-base font-semibold mb-1.5" style={{ color: "#0a2540" }}>
+        {title}
+      </h3>
+      <p className="text-sm leading-relaxed" style={{ color: "#425466" }}>
+        {description}
+      </p>
     </div>
   );
 }
@@ -329,26 +370,34 @@ function BigFeatureSection({
     >
       {/* Text side */}
       <div
-        className={cn(
-          "opacity-0",
-          isInView && "animate-mocha-fade-in-up stagger-1"
-        )}
+        className={cn("opacity-0", isInView && "animate-mocha-fade-in-up stagger-1")}
       >
-        <span className="inline-block text-xs font-semibold tracking-widest uppercase text-indigo-500 mb-4">
+        <span
+          className="inline-block text-xs font-semibold tracking-widest uppercase mb-4"
+          style={{ color: "#635bff" }}
+        >
           {feature.badge}
         </span>
-        <h2 className="text-3xl md:text-4xl font-medium tracking-tight leading-tight mb-4">
+        <h2
+          className="text-3xl md:text-4xl font-semibold tracking-tight leading-tight mb-4"
+          style={{ color: "#0a2540" }}
+        >
           {feature.headline}
         </h2>
-        <p className="text-base text-black/50 leading-relaxed mb-8">
+        <p className="text-base leading-relaxed mb-8" style={{ color: "#425466" }}>
           {feature.description}
         </p>
         <ul className="space-y-2.5">
           {feature.subFeatures.map((sf) => (
-            <li key={sf} className="flex items-center gap-3 text-sm text-black/65">
+            <li
+              key={sf}
+              className="flex items-center gap-3 text-sm"
+              style={{ color: "#425466" }}
+            >
               <CheckCircle2
-                className="w-4 h-4 text-indigo-500 flex-shrink-0"
+                className="w-4 h-4 flex-shrink-0"
                 strokeWidth={2}
+                style={{ color: "#635bff" }}
               />
               {sf}
             </li>
@@ -358,10 +407,7 @@ function BigFeatureSection({
 
       {/* Visual side */}
       <div
-        className={cn(
-          "opacity-0",
-          isInView && "animate-mocha-fade-in-up stagger-2"
-        )}
+        className={cn("opacity-0", isInView && "animate-mocha-fade-in-up stagger-2")}
       >
         {feature.visual}
       </div>
@@ -375,7 +421,8 @@ function StatsBar() {
   return (
     <div
       ref={ref}
-      className="border-y border-black/[0.06] py-12 px-6 bg-black/[0.01]"
+      className="border-y py-12 px-6"
+      style={{ borderColor: "#e7ecf1", background: "#f6f9fc" }}
     >
       <div className="max-w-4xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-8">
         {stats.map((stat, i) => (
@@ -386,10 +433,15 @@ function StatsBar() {
               isInView && `animate-mocha-fade-in-up stagger-${i + 1}`
             )}
           >
-            <p className="text-4xl md:text-5xl font-medium tracking-tight mb-1">
+            <p
+              className="text-4xl md:text-5xl font-semibold tracking-tight mb-1"
+              style={{ color: "#0a2540" }}
+            >
               {stat.value}
             </p>
-            <p className="text-sm text-black/40">{stat.label}</p>
+            <p className="text-sm" style={{ color: "#8c9eb1" }}>
+              {stat.label}
+            </p>
           </div>
         ))}
       </div>
@@ -401,32 +453,40 @@ function SmallFeaturesGrid() {
   const { ref, isInView } = useInView();
 
   return (
-    <section ref={ref} className="py-20 md:py-28 px-6">
+    <section
+      ref={ref}
+      className="py-20 md:py-28 px-6"
+      style={{ background: "#f6f9fc" }}
+    >
       <div className="max-w-6xl mx-auto">
         <div className="text-center mb-14">
           <p
             className={cn(
-              "text-xs font-semibold tracking-widest uppercase text-indigo-500 mb-3 opacity-0",
+              "text-xs font-semibold tracking-widest uppercase mb-3 opacity-0",
               isInView && "animate-mocha-fade-in-up stagger-1"
             )}
+            style={{ color: "#635bff" }}
           >
-            Built-in extras
+            Infrastructure
           </p>
           <h2
             className={cn(
-              "text-3xl md:text-4xl font-medium tracking-tight opacity-0",
+              "text-3xl md:text-4xl font-semibold tracking-tight opacity-0",
               isInView && "animate-mocha-fade-in-up stagger-2"
             )}
+            style={{ color: "#0a2540" }}
           >
-            And so much more
+            Built for scale and reliability
           </h2>
           <p
             className={cn(
-              "mt-4 text-base text-black/45 max-w-md mx-auto opacity-0",
+              "mt-4 text-base max-w-md mx-auto opacity-0",
               isInView && "animate-mocha-fade-in-up stagger-3"
             )}
+            style={{ color: "#425466" }}
           >
-            Every detail you'd expect — and plenty you wouldn't.
+            The foundations that power the world&apos;s most innovative
+            businesses.
           </p>
         </div>
 
@@ -449,26 +509,50 @@ function CTASection() {
   const { ref, isInView } = useInView();
 
   return (
-    <section ref={ref} className="py-20 md:py-28 px-6">
+    <section ref={ref} className="py-20 md:py-28 px-6 bg-white">
       <div
         className={cn(
           "max-w-3xl mx-auto text-center opacity-0",
           isInView && "animate-mocha-fade-in-up stagger-1"
         )}
       >
-        <h2 className="text-3xl md:text-4xl font-medium tracking-tight mb-4">
-          Start building today
-        </h2>
-        <p className="text-base text-black/45 mb-8 max-w-md mx-auto">
-          Join thousands of developers who ship faster with Mocha.
-        </p>
-        <a
-          href="/pricing"
-          className="inline-flex items-center gap-2 bg-black text-white text-sm font-medium px-7 py-3 rounded-full hover:bg-black/85 active:scale-[0.97] transition-all duration-200"
+        <h2
+          className="text-3xl md:text-4xl font-semibold tracking-tight mb-4"
+          style={{ color: "#0a2540" }}
         >
-          See pricing
-          <ArrowRight className="w-4 h-4" />
-        </a>
+          Start building for free
+        </h2>
+        <p
+          className="text-base mb-8 max-w-md mx-auto"
+          style={{ color: "#425466" }}
+        >
+          Join millions of businesses using Stripe to power their payments
+          infrastructure. No setup fees, no monthly fees.
+        </p>
+        <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
+          <a
+            href="https://dashboard.stripe.com/register"
+            className="inline-flex items-center gap-2 text-white text-sm font-semibold px-7 py-3 rounded-full transition-all duration-[150ms] active:scale-[0.97]"
+            style={{
+              background: "#635bff",
+              transitionTimingFunction: "cubic-bezier(0.215,0.61,0.355,1)",
+            }}
+          >
+            Get started
+            <ArrowRight className="w-4 h-4" />
+          </a>
+          <a
+            href="/docs"
+            className="inline-flex items-center gap-2 text-sm font-medium px-7 py-3 rounded-full border transition-all duration-[150ms]"
+            style={{
+              color: "#0a2540",
+              borderColor: "#e7ecf1",
+              transitionTimingFunction: "cubic-bezier(0.215,0.61,0.355,1)",
+            }}
+          >
+            Read the docs
+          </a>
+        </div>
       </div>
     </section>
   );
@@ -478,24 +562,57 @@ function CTASection() {
 
 function Hero() {
   return (
-    <section className="relative pt-32 pb-16 px-6 overflow-hidden">
-      {/* Subtle dot grid */}
-      <div className="absolute inset-0 mocha-grid-dots opacity-60 pointer-events-none" />
-      {/* Gradient orb */}
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[700px] h-[400px] bg-[radial-gradient(ellipse_at_center,rgba(99,102,241,0.07),transparent_70%)] pointer-events-none" />
+    <section className="relative pt-32 pb-16 px-6 overflow-hidden" style={{ background: "#0a2540" }}>
+      <div className="absolute inset-0 mocha-grid-dots opacity-10 pointer-events-none" />
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[700px] h-[400px] bg-[radial-gradient(ellipse_at_center,rgba(99,91,255,0.3),transparent_70%)] pointer-events-none" />
 
       <div className="relative z-10 max-w-4xl mx-auto text-center">
-        <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-indigo-500/10 border border-indigo-500/20 text-indigo-600 text-xs font-semibold tracking-wide uppercase mb-6 animate-mocha-hero-badge">
+        <div
+          className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border text-xs font-semibold tracking-wide uppercase mb-6 animate-mocha-hero-badge"
+          style={{
+            borderColor: "rgba(99,91,255,0.4)",
+            background: "rgba(99,91,255,0.15)",
+            color: "#a29dff",
+          }}
+        >
+          <Server className="w-3.5 h-3.5" />
           Product
         </div>
-        <h1 className="text-5xl md:text-6xl lg:text-7xl font-medium tracking-tight leading-[1.08] animate-mocha-hero-title stagger-2">
-          Everything you need
+        <h1
+          className="text-5xl md:text-6xl lg:text-7xl font-semibold tracking-tight leading-[1.08] animate-mocha-hero-title stagger-2 text-white"
+        >
+          A complete suite of
           <br />
-          <span className="mocha-text-shimmer">to build faster</span>
+          <span style={{ color: "#635bff" }}>financial APIs</span>
         </h1>
-        <p className="mt-6 text-lg md:text-xl text-black/50 max-w-xl mx-auto leading-relaxed animate-mocha-fade-in-up stagger-4">
-          One AI-native IDE with every tool a modern developer needs — from intelligent completions to full agentic workflows.
+        <p
+          className="mt-6 text-lg md:text-xl max-w-xl mx-auto leading-relaxed animate-mocha-fade-in-up stagger-4"
+          style={{ color: "rgba(255,255,255,0.6)" }}
+        >
+          Payments, billing, fraud prevention, identity, tax, and more — unified
+          in a single platform built for developers.
         </p>
+        <div className="mt-8 flex items-center justify-center gap-4 animate-mocha-fade-in-up stagger-5">
+          <a
+            href="https://dashboard.stripe.com/register"
+            className="inline-flex items-center gap-2 text-[#0a2540] text-sm font-semibold px-6 py-3 rounded-full bg-white hover:bg-white/90 transition-all duration-[150ms]"
+            style={{ transitionTimingFunction: "cubic-bezier(0.215,0.61,0.355,1)" }}
+          >
+            Start for free
+          </a>
+          <a
+            href="/docs"
+            className="inline-flex items-center gap-2 text-sm font-medium px-6 py-3 rounded-full border transition-all duration-[150ms]"
+            style={{
+              color: "rgba(255,255,255,0.8)",
+              borderColor: "rgba(255,255,255,0.2)",
+              transitionTimingFunction: "cubic-bezier(0.215,0.61,0.355,1)",
+            }}
+          >
+            View docs
+            <TrendingUp className="w-4 h-4" />
+          </a>
+        </div>
       </div>
     </section>
   );
@@ -505,7 +622,7 @@ function Hero() {
 
 export default function FeaturesPage() {
   return (
-    <div className="min-h-screen bg-white text-black">
+    <div className="min-h-screen bg-white" style={{ color: "#0a2540" }}>
       <Navbar />
       <Hero />
 
@@ -513,7 +630,7 @@ export default function FeaturesPage() {
       <StatsBar />
 
       {/* Big feature sections */}
-      <div className="py-20 md:py-28 px-6 space-y-28 md:space-y-40">
+      <div className="py-20 md:py-28 px-6 space-y-28 md:space-y-40 bg-white">
         <div className="max-w-6xl mx-auto space-y-28 md:space-y-40">
           {bigFeatures.map((feature, i) => (
             <BigFeatureSection key={feature.id} feature={feature} index={i} />

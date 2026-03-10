@@ -9,10 +9,10 @@ import { useInView } from "@/hooks/use-in-view";
 
 // ─── Data ────────────────────────────────────────────────────────────────────
 
-type BadgeType = "Feature" | "Performance" | "Fix" | "Breaking";
+type BadgeType = "API" | "Product" | "Beta" | "Breaking";
 
 interface Release {
-  version: string;
+  id: string;
   date: string;
   title: string;
   summary: string;
@@ -22,85 +22,87 @@ interface Release {
 
 const releases: Release[] = [
   {
-    version: "v1.4.0",
+    id: "mar-2026",
     date: "March 2026",
-    title: "The Speed Release",
+    title: "Stablecoin issuing beta",
     summary:
-      "A foundational performance overhaul. Cold start is 40% faster, completions now stream token-by-token, and the new agent marketplace makes it trivial to extend Mocha's capabilities.",
-    badges: ["Performance", "Feature"],
+      "Stripe now lets businesses issue stablecoin-backed cards and move money globally 24/7 — no bank cutoff times, no FX markups. The first major step toward programmable money rails built on Stripe infrastructure.",
+    badges: ["Beta", "Product"],
     changes: [
-      "40% faster cold start — Mocha opens in under 200ms on Apple Silicon",
-      "Streaming completions — see AI output token by token, no more waiting",
-      "Agent marketplace — browse, install, and manage AI agents from the community",
-      "Improved Git diff view with syntax highlighting and inline AI explanations",
-      "Background indexing improvements reduce initial project scan time by 60%",
+      "Issue stablecoin-backed Visa cards to employees and contractors globally",
+      "24/7 global transfers with real-time settlement, no bank holidays",
+      "USDC and USDB support with automatic conversion on spend",
+      "Dashboard support for stablecoin balances, transfers, and card issuance",
+      "New /v1/issuing/cards?currency=usdc API endpoints in public beta",
     ],
   },
   {
-    version: "v1.3.0",
+    id: "feb-2026",
     date: "February 2026",
-    title: "Agents Everywhere",
+    title: "Agentic commerce APIs",
     summary:
-      "Agentic tasks now span multiple files and pull requests. Mocha can operate in the background while you focus on other work, and a new task history panel keeps a full audit trail.",
-    badges: ["Feature"],
+      "Stripe launched APIs that let AI agents autonomously initiate and complete payment flows on behalf of users. Build products where AI handles subscription management, invoice approval, and procurement — with full human oversight controls.",
+    badges: ["API", "Beta"],
     changes: [
-      "Multi-file agent tasks — delegate changes that span your entire project",
-      "Autonomous PR descriptions — agent writes detailed, accurate PR summaries",
-      "Background indexing runs silently without interrupting active editing",
-      "Task history panel with full replay of agent decisions and diffs",
-      "Improved context window utilisation for large monorepos",
+      "New /v1/agents resource for creating delegated payment sessions",
+      "Spend controls and approval workflows for agent-initiated transactions",
+      "Webhook events for agent actions: agent.action.created, agent.action.approved",
+      "Support for Claude, OpenAI, and Gemini agent contexts out of the box",
+      "Sandbox environment for testing agent payment flows without real money",
     ],
   },
   {
-    version: "v1.2.0",
+    id: "jan-2026",
     date: "January 2026",
-    title: "Plugin SDK",
+    title: "Adaptive Pricing",
     summary:
-      "We opened up Mocha to the community. The public plugin API landed with 200 plugins on day one, plus theme support and deep keybinding customization.",
-    badges: ["Feature"],
+      "Adaptive Pricing automatically converts your prices to the buyer&apos;s local currency using real-time exchange rates. No code changes required — Stripe handles the conversion, display, and settlement seamlessly.",
+    badges: ["Product", "API"],
     changes: [
-      "Public plugin API — build and publish your own Mocha extensions",
-      "200+ community plugins available at launch via the plugin registry",
-      "Theme support — custom color schemes with full dark-mode control",
-      "Keybinding customization — map any action to any key combination",
+      "Automatic local currency pricing in 30+ currencies at checkout",
+      "Smart rounding rules to present locally natural price points (e.g. $9.99 → £7.99)",
+      "Price Lock feature freezes rates for up to 30 minutes per session",
+      "Revenue reporting in both settlement and presentment currencies",
+      "Works with Payment Links, Checkout, and custom integrations via the API",
     ],
   },
   {
-    version: "v1.1.0",
+    id: "dec-2025",
     date: "December 2025",
-    title: "Context Boost",
+    title: "Sessions 2025 announcements",
     summary:
-      "Doubled the context window to 200k tokens and added project-wide refactoring. Mocha can now reason about your whole codebase in a single pass.",
-    badges: ["Feature", "Performance"],
+      "At Stripe Sessions 2025, we announced a sweeping set of product updates across the entire platform — from a rebuilt Connect experience to Billing 3.0 and new Terminal hardware for in-person commerce.",
+    badges: ["Product"],
     changes: [
-      "200k token context window — full project awareness in one pass",
-      "Project-wide refactoring — rename, restructure, and migrate safely",
-      "Inline docs generation — add JSDoc/docstring annotations automatically",
-      "Performance: editor scroll latency reduced by 35% on large files",
+      "Connect revamp: new embedded onboarding components, faster KYC approval times",
+      "Billing 3.0: flexible pricing models, improved dunning engine, native A/B testing",
+      "Stripe Reader S700 and Reader M2 available in 40+ new countries",
+      "Financial Connections now supports open banking in EU and UK via PSD2",
+      "Stripe Tax now handles VAT OSS filing for EU-based businesses automatically",
     ],
   },
   {
-    version: "v1.0.0",
+    id: "nov-2025",
     date: "November 2025",
-    title: "Launch",
+    title: "Radar 3.0",
     summary:
-      "The first public release of Mocha. Core AI completions, a beautiful macOS-native UI, integrated terminal, and file tree — everything you need to start shipping faster today.",
-    badges: ["Feature"],
+      "Radar 3.0 introduces a next-generation ML fraud detection model retrained on hundreds of billions of data points, a rebuilt custom rules engine, and a new dispute management workflow — all designed to minimize fraud without blocking good customers.",
+    badges: ["Product", "API"],
     changes: [
-      "Core AI completions with context-aware suggestions across all major languages",
-      "macOS-native design with full Apple Silicon optimization",
-      "Integrated file tree with AI-aware navigation",
-      "Built-in terminal with command history and AI error explanations",
-      "Git integration with visual diff and AI-generated commit messages",
+      "New ML model delivers 30% improvement in fraud detection with 15% fewer false positives",
+      "Custom rules engine v2: conditional logic, regex support, and rule A/B testing",
+      "Dispute Intelligence: AI-generated rebuttal letters with evidence recommendations",
+      "Risk score now available as a webhook event field and in the Dashboard UI",
+      "Early Fraud Warning integration with Visa and Mastercard for real-time alerts",
     ],
   },
 ];
 
-const badgeStyles: Record<BadgeType, string> = {
-  Feature: "bg-indigo-50 text-indigo-600 border-indigo-100",
-  Performance: "bg-emerald-50 text-emerald-700 border-emerald-100",
-  Fix: "bg-amber-50 text-amber-700 border-amber-100",
-  Breaking: "bg-red-50 text-red-700 border-red-100",
+const badgeStyles: Record<BadgeType, React.CSSProperties> = {
+  API: { background: "#635bff15", color: "#635bff", borderColor: "#635bff30" },
+  Product: { background: "#e8fce9", color: "#1a7f37", borderColor: "#b4e5b8" },
+  Beta: { background: "#fff4e0", color: "#b45309", borderColor: "#fcd27b" },
+  Breaking: { background: "#fef2f2", color: "#b91c1c", borderColor: "#fca5a5" },
 };
 
 // ─── Sub-components ──────────────────────────────────────────────────────────
@@ -108,10 +110,8 @@ const badgeStyles: Record<BadgeType, string> = {
 function Badge({ type }: { type: BadgeType }) {
   return (
     <span
-      className={cn(
-        "inline-flex items-center text-[11px] font-semibold tracking-wide uppercase px-2.5 py-0.5 rounded-full border",
-        badgeStyles[type]
-      )}
+      className="inline-flex items-center text-[11px] font-semibold tracking-wide uppercase px-2.5 py-0.5 rounded-full border"
+      style={badgeStyles[type]}
     >
       {type}
     </span>
@@ -136,17 +136,25 @@ function ReleaseEntry({
         {/* Dot */}
         <div
           className={cn(
-            "w-3 h-3 rounded-full border-2 border-white ring-2 flex-shrink-0 mt-1 transition-all duration-500",
+            "w-3 h-3 rounded-full border-2 border-white ring-2 flex-shrink-0 mt-1 transition-all duration-500"
+          )}
+          style={
             isInView
               ? index === 0
-                ? "bg-indigo-500 ring-indigo-200"
-                : "bg-black ring-black/10"
-              : "bg-black/10 ring-black/5"
-          )}
+                ? {
+                    background: "#635bff",
+                    boxShadow: "0 0 0 4px rgba(99,91,255,0.15)",
+                  }
+                : { background: "#0a2540", boxShadow: "0 0 0 4px rgba(10,37,64,0.08)" }
+              : { background: "#e7ecf1", boxShadow: "0 0 0 4px rgba(231,236,241,0.5)" }
+          }
         />
         {/* Vertical line */}
         {!isLast && (
-          <div className="absolute top-4 bottom-0 left-1/2 -translate-x-1/2 w-px bg-black/[0.06]" />
+          <div
+            className="absolute top-4 bottom-0 left-1/2 -translate-x-1/2 w-px"
+            style={{ background: "#e7ecf1" }}
+          />
         )}
       </div>
 
@@ -160,16 +168,23 @@ function ReleaseEntry({
         {/* Header row */}
         <div className="flex flex-wrap items-center gap-3 mb-4">
           <span
-            className={cn(
-              "text-sm font-semibold font-mono px-3 py-1 rounded-full border",
+            className="text-sm font-semibold font-mono px-3 py-1 rounded-full border"
+            style={
               index === 0
-                ? "bg-indigo-500 text-white border-indigo-500"
-                : "bg-black/[0.04] text-black/70 border-black/[0.08]"
-            )}
+                ? {
+                    background: "#635bff",
+                    color: "white",
+                    borderColor: "#635bff",
+                  }
+                : {
+                    background: "#f6f9fc",
+                    color: "#425466",
+                    borderColor: "#e7ecf1",
+                  }
+            }
           >
-            {release.version}
+            {release.date}
           </span>
-          <span className="text-sm text-black/35">{release.date}</span>
           <div className="flex items-center gap-1.5 flex-wrap">
             {release.badges.map((b) => (
               <Badge key={b} type={b} />
@@ -178,25 +193,33 @@ function ReleaseEntry({
         </div>
 
         {/* Title */}
-        <h2 className="text-2xl md:text-3xl font-medium tracking-tight mb-3">
+        <h2
+          className="text-2xl md:text-3xl font-semibold tracking-tight mb-3"
+          style={{ color: "#0a2540" }}
+        >
           {release.title}
-          {release.version === "v1.0.0" && (
-            <span className="ml-2 text-2xl">🚀</span>
-          )}
         </h2>
 
         {/* Summary */}
-        <p className="text-base text-black/50 leading-relaxed mb-6 max-w-2xl">
+        <p
+          className="text-base leading-relaxed mb-6 max-w-2xl"
+          style={{ color: "#425466" }}
+        >
           {release.summary}
         </p>
 
         {/* Change list */}
         <ul className="space-y-2.5">
           {release.changes.map((change) => (
-            <li key={change} className="flex items-start gap-3 text-sm text-black/60">
+            <li
+              key={change}
+              className="flex items-start gap-3 text-sm"
+              style={{ color: "#425466" }}
+            >
               <Check
-                className="w-4 h-4 text-black/25 flex-shrink-0 mt-0.5"
+                className="w-4 h-4 flex-shrink-0 mt-0.5"
                 strokeWidth={2.5}
+                style={{ color: "#635bff" }}
               />
               <span className="leading-snug">{change}</span>
             </li>
@@ -218,11 +241,14 @@ function SubscribeForm() {
 
   if (submitted) {
     return (
-      <div className="flex items-center gap-2.5 text-sm text-black/60">
-        <div className="w-6 h-6 rounded-full bg-green-100 flex items-center justify-center">
-          <Check className="w-3.5 h-3.5 text-green-600" strokeWidth={2.5} />
+      <div className="flex items-center gap-2.5 text-sm" style={{ color: "#425466" }}>
+        <div
+          className="w-6 h-6 rounded-full flex items-center justify-center"
+          style={{ background: "#e8fce9" }}
+        >
+          <Check className="w-3.5 h-3.5" strokeWidth={2.5} style={{ color: "#1a7f37" }} />
         </div>
-        You're subscribed — we'll let you know when something ships.
+        You&apos;re subscribed — we&apos;ll notify you on new releases.
       </div>
     );
   }
@@ -235,11 +261,18 @@ function SubscribeForm() {
         onChange={(e) => setEmail(e.target.value)}
         placeholder="you@example.com"
         required
-        className="flex-1 h-9 px-3.5 text-sm bg-white border border-black/10 rounded-lg outline-none focus:border-black/25 focus:ring-2 focus:ring-black/5 placeholder:text-black/30 transition-all"
+        className="flex-1 h-9 px-3.5 text-sm bg-white border rounded-lg outline-none placeholder:text-[#8c9eb1] transition-all"
+        style={{ borderColor: "#e7ecf1", color: "#0a2540" }}
+        onFocus={(e) => (e.target.style.borderColor = "#635bff")}
+        onBlur={(e) => (e.target.style.borderColor = "#e7ecf1")}
       />
       <button
         type="submit"
-        className="h-9 px-4 bg-black text-white text-sm font-medium rounded-lg hover:bg-black/85 active:scale-[0.97] transition-all duration-200 flex items-center gap-1.5 flex-shrink-0"
+        className="h-9 px-4 text-white text-sm font-semibold rounded-lg flex items-center gap-1.5 flex-shrink-0 transition-all duration-[150ms]"
+        style={{
+          background: "#635bff",
+          transitionTimingFunction: "cubic-bezier(0.215,0.61,0.355,1)",
+        }}
       >
         Subscribe
         <ArrowRight className="w-3.5 h-3.5" />
@@ -250,30 +283,49 @@ function SubscribeForm() {
 
 function Hero() {
   return (
-    <section className="relative pt-32 pb-16 px-6 overflow-hidden">
+    <section
+      className="relative pt-32 pb-16 px-6 overflow-hidden"
+      style={{ background: "#f6f9fc" }}
+    >
       {/* Dot grid */}
-      <div className="absolute inset-0 mocha-grid-dots opacity-50 pointer-events-none" />
+      <div className="absolute inset-0 mocha-grid-dots opacity-40 pointer-events-none" />
       {/* Gradient orb */}
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[350px] bg-[radial-gradient(ellipse_at_center,rgba(99,102,241,0.06),transparent_70%)] pointer-events-none" />
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[350px] bg-[radial-gradient(ellipse_at_center,rgba(99,91,255,0.07),transparent_70%)] pointer-events-none" />
 
       <div className="relative z-10 max-w-4xl mx-auto">
         <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-8">
           {/* Left: heading */}
           <div>
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-indigo-500/10 border border-indigo-500/20 text-indigo-600 text-xs font-semibold tracking-wide uppercase mb-6 animate-mocha-hero-badge">
-              What's new
+            <div
+              className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border text-xs font-semibold tracking-wide uppercase mb-6 animate-mocha-hero-badge"
+              style={{
+                borderColor: "#635bff30",
+                background: "#635bff10",
+                color: "#635bff",
+              }}
+            >
+              What&apos;s new
             </div>
-            <h1 className="text-5xl md:text-6xl font-medium tracking-tight leading-[1.08] animate-mocha-hero-title stagger-2">
-              Changelog
+            <h1
+              className="text-5xl md:text-6xl font-semibold tracking-tight leading-[1.08] animate-mocha-hero-title stagger-2"
+              style={{ color: "#0a2540" }}
+            >
+              Stripe Changelog
             </h1>
-            <p className="mt-4 text-lg text-black/45 max-w-lg animate-mocha-fade-in-up stagger-4">
-              What's new in Mocha — updated regularly.
+            <p
+              className="mt-4 text-lg max-w-lg animate-mocha-fade-in-up stagger-4"
+              style={{ color: "#425466" }}
+            >
+              What&apos;s new in Stripe&apos;s APIs and products.
             </p>
           </div>
 
           {/* Right: subscribe */}
           <div className="animate-mocha-fade-in-up stagger-5 flex-shrink-0">
-            <p className="text-xs font-medium text-black/40 mb-2.5 uppercase tracking-wide">
+            <p
+              className="text-xs font-medium mb-2.5 uppercase tracking-wide"
+              style={{ color: "#8c9eb1" }}
+            >
               Get release notes
             </p>
             <SubscribeForm />
@@ -288,19 +340,19 @@ function Hero() {
 
 export default function ChangelogPage() {
   return (
-    <div className="min-h-screen bg-white text-black">
+    <div className="min-h-screen bg-white" style={{ color: "#0a2540" }}>
       <Navbar />
       <Hero />
 
       {/* Timeline */}
-      <section className="py-16 px-6">
+      <section className="py-16 px-6 bg-white">
         <div className="max-w-3xl mx-auto">
           {/* Thin top divider */}
-          <div className="h-px bg-black/[0.06] mb-16" />
+          <div className="h-px mb-16" style={{ background: "#e7ecf1" }} />
 
           {releases.map((release, i) => (
             <ReleaseEntry
-              key={release.version}
+              key={release.id}
               release={release}
               index={i}
               isLast={i === releases.length - 1}

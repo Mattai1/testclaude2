@@ -1,7 +1,16 @@
 "use client";
 
 import { useState, useRef, useEffect } from "react";
-import { Mail, MessageCircle, Newspaper, Headphones, MapPin, ArrowRight, CheckCircle } from "lucide-react";
+import {
+  Mail,
+  Newspaper,
+  Headphones,
+  MapPin,
+  ArrowRight,
+  CheckCircle,
+  Code2,
+  DollarSign,
+} from "lucide-react";
 import { Navbar } from "@/components/navbar";
 import { Footer } from "@/components/footer";
 import { cn } from "@/lib/utils";
@@ -11,42 +20,57 @@ import { useInView } from "@/hooks/use-in-view";
 
 const contactCards = [
   {
-    icon: Mail,
-    label: "General",
-    value: "hello@mocha.dev",
-    href: "mailto:hello@mocha.dev",
-    description: "Questions about Mocha, partnerships, or anything else.",
+    icon: DollarSign,
+    label: "Sales",
+    value: "Talk to our sales team",
+    href: "#sales-form",
+    description:
+      "For businesses with $1M+ in annual revenue. Explore volume pricing and custom contracts.",
+    cta: "Contact sales",
   },
   {
     icon: Headphones,
     label: "Support",
-    value: "support@mocha.dev",
-    href: "mailto:support@mocha.dev",
-    description: "Having trouble? Our support team typically replies within 2 hours.",
+    value: "Get help with your integration",
+    href: "https://support.stripe.com",
+    description:
+      "Browse documentation or reach out to our support team for technical help.",
+    cta: "Visit support",
   },
   {
     icon: Newspaper,
     label: "Press",
-    value: "press@mocha.dev",
-    href: "mailto:press@mocha.dev",
-    description: "Media inquiries, interviews, and press kit requests.",
+    value: "press@stripe.com",
+    href: "mailto:press@stripe.com",
+    description:
+      "Media inquiries, interviews, spokespeople, and press kit requests.",
+    cta: "Send an email",
   },
   {
-    icon: MessageCircle,
-    label: "Discord community",
-    value: "Join the server",
-    href: "https://discord.gg/mocha",
-    description: "Chat with the team and thousands of Mocha developers live.",
+    icon: Code2,
+    label: "Developers",
+    value: "stripe.com/docs",
+    href: "https://stripe.com/docs",
+    description:
+      "Full API reference, SDKs, and guides. Ask questions on Stack Overflow: stripe-payments.",
+    cta: "View docs",
   },
 ];
 
-const subjects = [
-  { value: "", label: "Select a subject" },
-  { value: "general", label: "General question" },
-  { value: "feature", label: "Feature request" },
-  { value: "bug", label: "Bug report" },
-  { value: "enterprise", label: "Enterprise inquiry" },
-  { value: "press", label: "Press" },
+const monthlyVolumes = [
+  { value: "", label: "Select monthly volume" },
+  { value: "<10k", label: "Less than $10,000" },
+  { value: "10k-100k", label: "$10,000 – $100,000" },
+  { value: "100k-1m", label: "$100,000 – $1,000,000" },
+  { value: "1m+", label: "$1,000,000+" },
+];
+
+const offices = [
+  "San Francisco, CA",
+  "Dublin, Ireland",
+  "Singapore",
+  "New York, NY",
+  "London, UK",
 ];
 
 // ─── Textarea with auto-resize ────────────────────────────────────────────────
@@ -78,32 +102,28 @@ function AutoResizeTextarea({
       value={value}
       onChange={(e) => onChange(e.target.value)}
       placeholder={placeholder}
-      className={cn(
-        "w-full resize-none overflow-hidden",
-        className
-      )}
+      className={cn("w-full resize-none overflow-hidden", className)}
     />
   );
 }
 
-// ─── Contact Form ─────────────────────────────────────────────────────────────
+// ─── Sales Form ─────────────────────────────────────────────────────────────
 
-function ContactForm() {
-  const [name, setName] = useState("");
+function SalesForm() {
+  const [company, setCompany] = useState("");
   const [email, setEmail] = useState("");
-  const [subject, setSubject] = useState("");
+  const [volume, setVolume] = useState("");
   const [message, setMessage] = useState("");
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
 
   const fieldClass =
-    "w-full border border-black/15 rounded-xl px-4 py-3 text-sm text-black placeholder:text-black/35 focus:outline-none focus:border-black/40 transition-colors duration-200 bg-white";
+    "w-full border rounded-xl px-4 py-3 text-sm text-[#0a2540] placeholder:text-[#8c9eb1] focus:outline-none transition-colors duration-200 bg-white";
 
   function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
-    if (!name.trim() || !email.trim() || !message.trim()) return;
+    if (!company.trim() || !email.trim()) return;
     setLoading(true);
-    // Simulate async submit
     setTimeout(() => {
       setLoading(false);
       setSubmitted(true);
@@ -113,28 +133,37 @@ function ContactForm() {
   if (submitted) {
     return (
       <div className="flex flex-col items-center justify-center text-center py-16 px-6">
-        <div className="w-14 h-14 rounded-full bg-black/[0.04] flex items-center justify-center mb-5">
-          <CheckCircle className="w-7 h-7 text-black/70" strokeWidth={1.5} />
+        <div
+          className="w-14 h-14 rounded-full flex items-center justify-center mb-5"
+          style={{ background: "#635bff15" }}
+        >
+          <CheckCircle className="w-7 h-7" strokeWidth={1.5} style={{ color: "#635bff" }} />
         </div>
-        <h3 className="text-xl font-medium tracking-tight mb-2">
-          Message sent!
+        <h3
+          className="text-xl font-semibold tracking-tight mb-2"
+          style={{ color: "#0a2540" }}
+        >
+          Request received!
         </h3>
-        <p className="text-sm text-black/50 max-w-xs leading-relaxed">
-          Thanks for reaching out. We&apos;ll get back to you at{" "}
-          <span className="text-black/70 font-medium">{email}</span> within one
-          business day.
+        <p className="text-sm max-w-xs leading-relaxed" style={{ color: "#8c9eb1" }}>
+          Thanks for reaching out. Our sales team will contact you at{" "}
+          <span className="font-medium" style={{ color: "#425466" }}>
+            {email}
+          </span>{" "}
+          within one business day.
         </p>
         <button
           onClick={() => {
             setSubmitted(false);
-            setName("");
+            setCompany("");
             setEmail("");
-            setSubject("");
+            setVolume("");
             setMessage("");
           }}
-          className="mt-8 text-sm text-black/40 hover:text-black transition-colors duration-200 underline underline-offset-4"
+          className="mt-8 text-sm hover:underline underline-offset-4 transition-colors duration-200"
+          style={{ color: "#635bff" }}
         >
-          Send another message
+          Send another request
         </button>
       </div>
     );
@@ -142,58 +171,76 @@ function ContactForm() {
 
   return (
     <form onSubmit={handleSubmit} className="space-y-4">
-      {/* Name */}
+      {/* Company name */}
       <div>
-        <label className="block text-xs font-medium text-black/50 mb-1.5">
-          Name
+        <label
+          className="block text-xs font-medium mb-1.5"
+          style={{ color: "#8c9eb1" }}
+        >
+          Company name
         </label>
         <input
           type="text"
-          value={name}
-          onChange={(e) => setName(e.target.value)}
-          placeholder="Your name"
+          value={company}
+          onChange={(e) => setCompany(e.target.value)}
+          placeholder="Acme Corp"
           required
           className={fieldClass}
+          style={{ borderColor: "#e7ecf1" }}
+          onFocus={(e) => (e.target.style.borderColor = "#635bff")}
+          onBlur={(e) => (e.target.style.borderColor = "#e7ecf1")}
         />
       </div>
 
       {/* Email */}
       <div>
-        <label className="block text-xs font-medium text-black/50 mb-1.5">
-          Email
+        <label
+          className="block text-xs font-medium mb-1.5"
+          style={{ color: "#8c9eb1" }}
+        >
+          Work email
         </label>
         <input
           type="email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
-          placeholder="you@example.com"
+          placeholder="you@company.com"
           required
           className={fieldClass}
+          style={{ borderColor: "#e7ecf1" }}
+          onFocus={(e) => (e.target.style.borderColor = "#635bff")}
+          onBlur={(e) => (e.target.style.borderColor = "#e7ecf1")}
         />
       </div>
 
-      {/* Subject */}
+      {/* Monthly volume */}
       <div>
-        <label className="block text-xs font-medium text-black/50 mb-1.5">
-          Subject
+        <label
+          className="block text-xs font-medium mb-1.5"
+          style={{ color: "#8c9eb1" }}
+        >
+          Monthly payment volume
         </label>
         <select
-          value={subject}
-          onChange={(e) => setSubject(e.target.value)}
+          value={volume}
+          onChange={(e) => setVolume(e.target.value)}
           className={cn(
             fieldClass,
-            subject === "" ? "text-black/35" : "text-black",
-            "appearance-none cursor-pointer"
+            "appearance-none cursor-pointer",
+            volume === "" ? "text-[#8c9eb1]" : "text-[#0a2540]"
           )}
+          style={{ borderColor: "#e7ecf1" }}
+          onFocus={(e) => (e.target.style.borderColor = "#635bff")}
+          onBlur={(e) => (e.target.style.borderColor = "#e7ecf1")}
         >
-          {subjects.map((s) => (
+          {monthlyVolumes.map((v) => (
             <option
-              key={s.value}
-              value={s.value}
-              disabled={s.value === ""}
-              className="text-black"
+              key={v.value}
+              value={v.value}
+              disabled={v.value === ""}
+              className="text-[#0a2540]"
             >
-              {s.label}
+              {v.label}
             </option>
           ))}
         </select>
@@ -201,26 +248,32 @@ function ContactForm() {
 
       {/* Message */}
       <div>
-        <label className="block text-xs font-medium text-black/50 mb-1.5">
-          Message
+        <label
+          className="block text-xs font-medium mb-1.5"
+          style={{ color: "#8c9eb1" }}
+        >
+          How can we help?
         </label>
         <AutoResizeTextarea
           value={message}
           onChange={setMessage}
-          placeholder="Tell us what's on your mind..."
-          className={fieldClass}
+          placeholder="Tell us about your business and what you're looking to build..."
+          className={cn(fieldClass, "border border-[#e7ecf1]")}
         />
       </div>
 
       {/* Submit */}
       <button
         type="submit"
-        disabled={loading || !name.trim() || !email.trim() || !message.trim()}
+        disabled={loading || !company.trim() || !email.trim()}
         className={cn(
-          "w-full flex items-center justify-center gap-2.5 bg-black text-white font-medium text-sm px-7 py-3.5 rounded-full transition-all duration-200",
-          "hover:bg-black/85 active:scale-[0.98]",
-          "disabled:opacity-40 disabled:cursor-not-allowed disabled:active:scale-100"
+          "w-full flex items-center justify-center gap-2.5 text-white font-semibold text-sm px-7 py-3.5 rounded-full transition-all duration-[150ms]",
+          "disabled:opacity-40 disabled:cursor-not-allowed"
         )}
+        style={{
+          background: "#635bff",
+          transitionTimingFunction: "cubic-bezier(0.215,0.61,0.355,1)",
+        }}
       >
         {loading ? (
           <>
@@ -232,7 +285,7 @@ function ContactForm() {
           </>
         ) : (
           <>
-            Send message
+            Talk to sales
             <ArrowRight className="w-4 h-4" />
           </>
         )}
@@ -243,11 +296,7 @@ function ContactForm() {
 
 // ─── Contact info column ──────────────────────────────────────────────────────
 
-function ContactInfoColumn({
-  isInView,
-}: {
-  isInView: boolean;
-}) {
+function ContactInfoColumn({ isInView }: { isInView: boolean }) {
   return (
     <div className="space-y-4">
       {contactCards.map((card, i) => {
@@ -257,29 +306,52 @@ function ContactInfoColumn({
             key={card.label}
             href={card.href}
             target={card.href.startsWith("http") ? "_blank" : undefined}
-            rel={card.href.startsWith("http") ? "noopener noreferrer" : undefined}
+            rel={
+              card.href.startsWith("http") ? "noopener noreferrer" : undefined
+            }
             className={cn(
-              "flex items-start gap-4 p-5 rounded-2xl border border-black/[0.06] bg-white",
-              "hover:border-black/12 hover:shadow-md hover:shadow-black/[0.03] hover:-translate-y-0.5",
+              "flex items-start gap-4 p-5 rounded-2xl border bg-white",
+              "hover:-translate-y-0.5",
               "transition-all duration-300 group opacity-0",
               isInView && `animate-mocha-fade-in-up stagger-${i + 2}`
             )}
+            style={{
+              borderColor: "#e7ecf1",
+              boxShadow: "0 2px 8px rgba(50,50,93,0.04)",
+            }}
           >
-            <div className="w-10 h-10 rounded-xl bg-black/[0.04] flex items-center justify-center flex-shrink-0 mt-0.5 group-hover:bg-indigo-500/10 transition-colors duration-300">
+            <div
+              className="w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0 mt-0.5 transition-colors duration-300"
+              style={{ background: "#635bff10" }}
+            >
               <Icon
-                className="w-4.5 h-4.5 text-black/50 group-hover:text-indigo-500 transition-colors duration-300"
+                className="w-4 h-4 transition-colors duration-300"
                 strokeWidth={1.5}
+                style={{ color: "#635bff" }}
               />
             </div>
-            <div className="min-w-0">
-              <p className="text-xs font-medium text-black/40 uppercase tracking-wide mb-0.5">
+            <div className="min-w-0 flex-1">
+              <p
+                className="text-xs font-medium uppercase tracking-wide mb-0.5"
+                style={{ color: "#8c9eb1" }}
+              >
                 {card.label}
               </p>
-              <p className="text-sm font-medium text-black truncate">
+              <p
+                className="text-sm font-semibold truncate mb-1"
+                style={{ color: "#0a2540" }}
+              >
                 {card.value}
               </p>
-              <p className="text-xs text-black/45 mt-1 leading-relaxed">
+              <p className="text-xs leading-relaxed" style={{ color: "#8c9eb1" }}>
                 {card.description}
+              </p>
+              <p
+                className="text-xs font-medium mt-2 flex items-center gap-1 group-hover:gap-2 transition-all duration-200"
+                style={{ color: "#635bff" }}
+              >
+                {card.cta}
+                <ArrowRight className="w-3 h-3" />
               </p>
             </div>
           </a>
@@ -289,82 +361,110 @@ function ContactInfoColumn({
   );
 }
 
-// ─── Office location ──────────────────────────────────────────────────────────
+// ─── Office locations ─────────────────────────────────────────────────────────
 
 function OfficeSection() {
   const { ref, isInView } = useInView();
 
   return (
-    <section ref={ref} className="py-16 md:py-24 px-6 bg-black/[0.015]">
+    <section
+      ref={ref}
+      className="py-16 md:py-24 px-6"
+      style={{ background: "#f6f9fc" }}
+    >
       <div className="max-w-6xl mx-auto">
         <div
           className={cn(
-            "rounded-3xl border border-black/[0.06] bg-white overflow-hidden opacity-0",
+            "rounded-3xl border overflow-hidden opacity-0",
             isInView && "animate-mocha-fade-in-up stagger-1"
           )}
+          style={{ borderColor: "#e7ecf1", background: "white" }}
         >
           <div className="grid md:grid-cols-2">
             {/* Map placeholder */}
-            <div className="relative h-56 md:h-full min-h-[220px] bg-black/[0.025] overflow-hidden">
-              {/* Dot grid overlay */}
+            <div
+              className="relative h-56 md:h-full min-h-[220px] overflow-hidden"
+              style={{ background: "#f6f9fc" }}
+            >
               <div className="absolute inset-0 mocha-grid-dots opacity-60 pointer-events-none" />
 
-              {/* Stylized city grid lines */}
               <div className="absolute inset-0 flex items-center justify-center">
                 <div className="relative w-64 h-48">
-                  {/* Grid lines */}
                   {[0, 1, 2, 3, 4].map((n) => (
                     <div
                       key={`h-${n}`}
-                      className="absolute left-0 right-0 border-t border-black/[0.07]"
-                      style={{ top: `${n * 25}%` }}
+                      className="absolute left-0 right-0 border-t"
+                      style={{ top: `${n * 25}%`, borderColor: "#e7ecf1" }}
                     />
                   ))}
                   {[0, 1, 2, 3, 4].map((n) => (
                     <div
                       key={`v-${n}`}
-                      className="absolute top-0 bottom-0 border-l border-black/[0.07]"
-                      style={{ left: `${n * 25}%` }}
+                      className="absolute top-0 bottom-0 border-l"
+                      style={{ left: `${n * 25}%`, borderColor: "#e7ecf1" }}
                     />
                   ))}
-                  {/* Pin */}
                   <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-full">
-                    <div className="w-3 h-3 rounded-full bg-black shadow-lg shadow-black/20" />
-                    <div className="w-px h-4 bg-black mx-auto" />
+                    <div
+                      className="w-3 h-3 rounded-full shadow-lg"
+                      style={{ background: "#635bff" }}
+                    />
+                    <div
+                      className="w-px h-4 mx-auto"
+                      style={{ background: "#635bff" }}
+                    />
                   </div>
                 </div>
               </div>
 
-              <span className="absolute bottom-4 left-4 text-xs text-black/30 font-medium">
-                San Francisco, CA
+              <span
+                className="absolute bottom-4 left-4 text-xs font-medium"
+                style={{ color: "#8c9eb1" }}
+              >
+                Global offices
               </span>
             </div>
 
             {/* Location info */}
             <div className="p-8 md:p-10 flex flex-col justify-center">
-              <div className="w-10 h-10 rounded-xl bg-black/[0.04] flex items-center justify-center mb-5">
-                <MapPin className="w-5 h-5 text-black/50" strokeWidth={1.5} />
+              <div
+                className="w-10 h-10 rounded-xl flex items-center justify-center mb-5"
+                style={{ background: "#635bff15" }}
+              >
+                <MapPin
+                  className="w-5 h-5"
+                  strokeWidth={1.5}
+                  style={{ color: "#635bff" }}
+                />
               </div>
-              <h3 className="text-xl font-medium tracking-tight mb-2">
-                San Francisco, CA
+              <h3
+                className="text-xl font-semibold tracking-tight mb-2"
+                style={{ color: "#0a2540" }}
+              >
+                Worldwide presence
               </h3>
-              <p className="text-sm text-black/50 leading-relaxed mb-6">
-                Our headquarters are in the heart of SoMa. We also have team
-                members working remotely across North America, Europe, and Asia.
+              <p
+                className="text-sm leading-relaxed mb-6"
+                style={{ color: "#425466" }}
+              >
+                Stripe operates globally with offices across multiple continents,
+                serving businesses in 195+ countries with local expertise and
+                support.
               </p>
-              <div className="space-y-1.5">
-                <p className="text-sm text-black/70">
-                  <span className="text-black/35 text-xs uppercase tracking-wide font-medium mr-2">
-                    Address
+              <div className="flex flex-wrap gap-2">
+                {offices.map((office) => (
+                  <span
+                    key={office}
+                    className="text-xs font-medium px-3 py-1.5 rounded-full border"
+                    style={{
+                      color: "#425466",
+                      borderColor: "#e7ecf1",
+                      background: "#f6f9fc",
+                    }}
+                  >
+                    {office}
                   </span>
-                  340 Pine Street, San Francisco, CA 94104
-                </p>
-                <p className="text-sm text-black/70">
-                  <span className="text-black/35 text-xs uppercase tracking-wide font-medium mr-2">
-                    Hours
-                  </span>
-                  Mon–Fri, 9 am – 6 pm PT
-                </p>
+                ))}
               </div>
             </div>
           </div>
@@ -380,41 +480,53 @@ function ContactSection() {
   const { ref, isInView } = useInView();
 
   return (
-    <section ref={ref} className="py-16 md:py-24 px-6">
+    <section ref={ref} className="py-16 md:py-24 px-6 bg-white">
       <div className="max-w-6xl mx-auto">
         <div className="grid md:grid-cols-2 gap-12 lg:gap-20 items-start">
           {/* Left: contact info */}
           <div>
             <p
               className={cn(
-                "text-sm font-medium text-indigo-500 tracking-wide uppercase mb-3 opacity-0",
+                "text-sm font-medium tracking-wide uppercase mb-3 opacity-0",
                 isInView && "animate-mocha-fade-in-up stagger-1"
               )}
+              style={{ color: "#635bff" }}
             >
               Reach out
             </p>
             <h2
               className={cn(
-                "text-2xl md:text-3xl font-medium tracking-tight mb-8 opacity-0",
+                "text-2xl md:text-3xl font-semibold tracking-tight mb-8 opacity-0",
                 isInView && "animate-mocha-fade-in-up stagger-2"
               )}
+              style={{ color: "#0a2540" }}
             >
-              The right channel for your message
+              The right channel for your needs
             </h2>
             <ContactInfoColumn isInView={isInView} />
           </div>
 
           {/* Right: form */}
           <div
+            id="sales-form"
             className={cn(
-              "rounded-2xl border border-black/[0.06] bg-white p-7 md:p-8 opacity-0",
+              "rounded-2xl border p-7 md:p-8 opacity-0",
               isInView && "animate-mocha-fade-in-up stagger-2"
             )}
+            style={{
+              borderColor: "#e7ecf1",
+              background: "white",
+              boxShadow:
+                "0 6px 12px -2px rgba(50,50,93,0.1), 0 3px 7px -3px rgba(0,0,0,0.1)",
+            }}
           >
-            <h3 className="text-lg font-medium tracking-tight mb-6">
-              Send us a message
+            <h3
+              className="text-lg font-semibold tracking-tight mb-6"
+              style={{ color: "#0a2540" }}
+            >
+              Talk to sales
             </h3>
-            <ContactForm />
+            <SalesForm />
           </div>
         </div>
       </div>
@@ -426,23 +538,35 @@ function ContactSection() {
 
 function HeroSection() {
   return (
-    <section className="relative pt-32 pb-16 md:pb-20 px-6 overflow-hidden">
+    <section
+      className="relative pt-32 pb-16 md:pb-20 px-6 overflow-hidden"
+      style={{ background: "#f6f9fc" }}
+    >
       {/* Dot grid */}
-      <div className="absolute inset-0 mocha-grid-dots pointer-events-none" />
+      <div className="absolute inset-0 mocha-grid-dots opacity-40 pointer-events-none" />
 
       {/* Gradient orb */}
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[380px] bg-[radial-gradient(ellipse_at_center,rgba(99,102,241,0.07),transparent_70%)] pointer-events-none" />
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[380px] bg-[radial-gradient(ellipse_at_center,rgba(99,91,255,0.08),transparent_70%)] pointer-events-none" />
 
       <div className="relative z-10 max-w-4xl mx-auto">
-        <p className="text-sm font-medium text-indigo-500 tracking-wide uppercase mb-5 animate-mocha-fade-in stagger-1">
+        <p
+          className="text-sm font-medium tracking-wide uppercase mb-5 animate-mocha-fade-in stagger-1"
+          style={{ color: "#635bff" }}
+        >
           Contact
         </p>
-        <h1 className="text-4xl md:text-6xl lg:text-[64px] font-medium tracking-tight leading-[1.05] opacity-0 animate-mocha-fade-in-up stagger-2">
-          Get in touch
+        <h1
+          className="text-4xl md:text-6xl lg:text-[64px] font-medium tracking-tight leading-[1.05] opacity-0 animate-mocha-fade-in-up stagger-2"
+          style={{ color: "#0a2540" }}
+        >
+          Contact us
         </h1>
-        <p className="mt-5 text-lg md:text-xl text-black/50 max-w-xl leading-relaxed opacity-0 animate-mocha-fade-in-up stagger-3">
-          We&apos;d love to hear from you — whether you have a question, a
-          feature idea, or just want to say hello.
+        <p
+          className="mt-5 text-lg md:text-xl max-w-xl leading-relaxed opacity-0 animate-mocha-fade-in-up stagger-3"
+          style={{ color: "#425466" }}
+        >
+          Whether you need help with your integration, want custom pricing, or
+          have a media inquiry — we&apos;re here to help.
         </p>
       </div>
     </section>
@@ -453,7 +577,7 @@ function HeroSection() {
 
 export default function ContactPage() {
   return (
-    <div className="min-h-screen bg-white text-black">
+    <div className="min-h-screen bg-white" style={{ color: "#0a2540" }}>
       <Navbar />
       <HeroSection />
       <ContactSection />
