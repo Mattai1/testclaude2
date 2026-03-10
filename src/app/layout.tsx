@@ -8,18 +8,21 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "Mocha — The Agentic Development Platform",
-  description: "Mocha is our agentic development platform, evolving the IDE into the agent-first era.",
+  title: "Stripe | Financial Infrastructure for the Internet",
+  description:
+    "Accept payments, build a marketplace, and grow your revenue online with Stripe's powerful APIs and tools.",
   openGraph: {
     type: "website",
-    siteName: "Mocha",
-    title: "Mocha — The Agentic Development Platform",
-    description: "Mocha is our agentic development platform, evolving the IDE into the agent-first era.",
+    siteName: "Stripe",
+    title: "Stripe | Financial Infrastructure for the Internet",
+    description:
+      "Accept payments, build a marketplace, and grow your revenue online with Stripe's powerful APIs and tools.",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Mocha — The Agentic Development Platform",
-    description: "Mocha is our agentic development platform, evolving the IDE into the agent-first era.",
+    title: "Stripe | Financial Infrastructure for the Internet",
+    description:
+      "Accept payments, build a marketplace, and grow your revenue online with Stripe's powerful APIs and tools.",
   },
 };
 

@@ -1,25 +1,80 @@
 "use client";
 
-import { MochaLogo } from "./mocha-logo";
 import { cn } from "@/lib/utils";
 import { useInView } from "@/hooks/use-in-view";
 
-const footerLinks = [
+const footerColumns = [
   {
-    title: "Product",
-    links: ["Features", "Pricing", "Changelog", "Roadmap"],
+    title: "Products & Pricing",
+    links: [
+      "Pricing",
+      "Atlas",
+      "Billing",
+      "Checkout",
+      "Connect",
+      "Elements",
+      "Financial Accounts",
+      "Identity",
+      "Invoicing",
+      "Issuing",
+      "Payments",
+      "Payment Links",
+      "Radar",
+      "Revenue Recognition",
+      "Tax",
+      "Terminal",
+    ],
+  },
+  {
+    title: "Solutions",
+    links: [
+      "Enterprises",
+      "Startups",
+      "Agentic commerce",
+      "Ecommerce",
+      "Embedded finance",
+      "Finance automation",
+      "Global businesses",
+      "Marketplaces",
+      "Platforms",
+      "SaaS",
+    ],
+  },
+  {
+    title: "Developers",
+    links: [
+      "Documentation",
+      "API reference",
+      "API status",
+      "API changelog",
+      "Libraries and SDKs",
+      "Developer blog",
+    ],
   },
   {
     title: "Resources",
-    links: ["Documentation", "API Reference", "Blog", "Community"],
+    links: [
+      "App integrations",
+      "Code samples",
+      "Guides",
+      "Customer stories",
+      "Blog",
+      "Sessions conference",
+    ],
   },
   {
     title: "Company",
-    links: ["About", "Careers", "Press", "Contact"],
+    links: [
+      "Jobs",
+      "Newsroom",
+      "Stripe Press",
+      "Contact sales",
+      "Become a partner",
+    ],
   },
   {
-    title: "Legal",
-    links: ["Privacy", "Terms", "Security", "Cookies"],
+    title: "Support",
+    links: ["Get support", "Support plans", "Professional services"],
   },
 ];
 
@@ -29,39 +84,114 @@ export function Footer() {
   return (
     <footer
       ref={ref}
-      className={cn(
-        "border-t border-black/5 pt-16 pb-8 px-6 opacity-0",
-        isInView && "animate-mocha-fade-in"
-      )}
+      style={{ backgroundColor: "#0a2540" }}
+      className={cn("opacity-0", isInView && "animate-mocha-fade-in")}
     >
-      <div className="max-w-6xl mx-auto">
-        <div className="grid grid-cols-2 md:grid-cols-5 gap-8 mb-16">
-          {/* Brand column */}
-          <div className="col-span-2 md:col-span-1">
-            <div className="flex items-center gap-2 mb-4">
-              <MochaLogo className="w-6 h-6" />
-              <span className="text-[15px] font-medium tracking-tight">
-                Mocha
-              </span>
-            </div>
-            <p className="text-sm text-black/40 leading-relaxed">
-              The agentic development platform for the next generation of
-              builders.
-            </p>
-          </div>
+      <div className="max-w-7xl mx-auto px-6 lg:px-8">
+        {/* Top bar: logo + locale */}
+        <div
+          className="flex items-center justify-between py-8"
+          style={{ borderBottom: "1px solid rgba(255,255,255,0.08)" }}
+        >
+          <a
+            href="#"
+            className="text-[22px] font-bold tracking-tight"
+            style={{ color: "#635bff" }}
+          >
+            stripe
+          </a>
 
-          {/* Link columns */}
-          {footerLinks.map((group) => (
-            <div key={group.title}>
-              <h4 className="text-sm font-medium text-black/80 mb-4">
-                {group.title}
+          <button
+            className="flex items-center gap-2 text-sm font-light transition-colors duration-150"
+            style={{
+              color: "#adbdcc",
+              transitionTimingFunction: "cubic-bezier(0.215, 0.61, 0.355, 1)",
+            }}
+            onMouseEnter={(e) =>
+              (e.currentTarget.style.color = "#fff")
+            }
+            onMouseLeave={(e) =>
+              (e.currentTarget.style.color = "#adbdcc")
+            }
+          >
+            <svg
+              width="16"
+              height="16"
+              viewBox="0 0 16 16"
+              fill="none"
+              aria-hidden="true"
+            >
+              <circle
+                cx="8"
+                cy="8"
+                r="6.5"
+                stroke="currentColor"
+                strokeWidth="1.2"
+              />
+              <ellipse
+                cx="8"
+                cy="8"
+                rx="2.5"
+                ry="6.5"
+                stroke="currentColor"
+                strokeWidth="1.2"
+              />
+              <path
+                d="M1.5 8h13M8 1.5C6 3.5 5 5.5 5 8s1 4.5 3 6.5"
+                stroke="currentColor"
+                strokeWidth="1.2"
+                strokeLinecap="round"
+              />
+            </svg>
+            United States
+            <svg
+              width="10"
+              height="6"
+              viewBox="0 0 10 6"
+              fill="none"
+              aria-hidden="true"
+            >
+              <path
+                d="M1 1l4 4 4-4"
+                stroke="currentColor"
+                strokeWidth="1.4"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
+            </svg>
+          </button>
+        </div>
+
+        {/* Link columns grid */}
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-x-6 gap-y-10 py-12">
+          {footerColumns.map((col) => (
+            <div key={col.title}>
+              <h4
+                className="text-xs font-semibold uppercase tracking-wide mb-4"
+                style={{ color: "#8c9eb1" }}
+              >
+                {col.title}
               </h4>
-              <ul className="space-y-2.5">
-                {group.links.map((link) => (
+              <ul>
+                {col.links.map((link) => (
                   <li key={link}>
                     <a
                       href="#"
-                      className="text-sm text-black/40 hover:text-black transition-colors duration-200"
+                      className="block mb-2 transition-colors"
+                      style={{
+                        fontSize: "13px",
+                        color: "#adbdcc",
+                        fontWeight: 300,
+                        transitionDuration: "150ms",
+                        transitionTimingFunction:
+                          "cubic-bezier(0.215, 0.61, 0.355, 1)",
+                      }}
+                      onMouseEnter={(e) =>
+                        (e.currentTarget.style.color = "#fff")
+                      }
+                      onMouseLeave={(e) =>
+                        (e.currentTarget.style.color = "#adbdcc")
+                      }
                     >
                       {link}
                     </a>
@@ -73,29 +203,83 @@ export function Footer() {
         </div>
 
         {/* Bottom bar */}
-        <div className="border-t border-black/5 pt-8 flex flex-col md:flex-row items-center justify-between gap-4">
-          <span className="text-xs text-black/30">
-            &copy; {new Date().getFullYear()} Mocha. All rights reserved.
+        <div
+          className="flex flex-col sm:flex-row items-center justify-between gap-4 py-8"
+          style={{ borderTop: "1px solid rgba(255,255,255,0.08)" }}
+        >
+          <span className="text-xs" style={{ color: "#8c9eb1", fontWeight: 300 }}>
+            &copy; 2026 Stripe, Inc.
           </span>
+
           <div className="flex items-center gap-6">
-            <a
-              href="#"
-              className="text-xs text-black/30 hover:text-black/60 transition-colors"
+            {["Privacy Policy", "Terms", "Cookie settings"].map(
+              (label, i) => (
+                <span key={label} className="flex items-center gap-6">
+                  {i > 0 && (
+                    <span
+                      className="hidden sm:block"
+                      style={{ color: "rgba(255,255,255,0.15)" }}
+                    >
+                      |
+                    </span>
+                  )}
+                  <a
+                    href="#"
+                    className="text-xs transition-colors"
+                    style={{
+                      color: "#8c9eb1",
+                      fontWeight: 300,
+                      transitionDuration: "150ms",
+                      transitionTimingFunction:
+                        "cubic-bezier(0.215, 0.61, 0.355, 1)",
+                    }}
+                    onMouseEnter={(e) =>
+                      (e.currentTarget.style.color = "#fff")
+                    }
+                    onMouseLeave={(e) =>
+                      (e.currentTarget.style.color = "#8c9eb1")
+                    }
+                  >
+                    {label}
+                  </a>
+                </span>
+              )
+            )}
+
+            <span
+              className="hidden sm:block"
+              style={{ color: "rgba(255,255,255,0.15)" }}
             >
-              Twitter
-            </a>
-            <a
-              href="#"
-              className="text-xs text-black/30 hover:text-black/60 transition-colors"
-            >
-              GitHub
-            </a>
-            <a
-              href="#"
-              className="text-xs text-black/30 hover:text-black/60 transition-colors"
-            >
-              Discord
-            </a>
+              |
+            </span>
+
+            {/* Social links */}
+            {[
+              { label: "Twitter / X", href: "#" },
+              { label: "LinkedIn", href: "#" },
+              { label: "YouTube", href: "#" },
+            ].map((social) => (
+              <a
+                key={social.label}
+                href={social.href}
+                className="text-xs transition-colors"
+                style={{
+                  color: "#8c9eb1",
+                  fontWeight: 300,
+                  transitionDuration: "150ms",
+                  transitionTimingFunction:
+                    "cubic-bezier(0.215, 0.61, 0.355, 1)",
+                }}
+                onMouseEnter={(e) =>
+                  (e.currentTarget.style.color = "#fff")
+                }
+                onMouseLeave={(e) =>
+                  (e.currentTarget.style.color = "#8c9eb1")
+                }
+              >
+                {social.label}
+              </a>
+            ))}
           </div>
         </div>
       </div>

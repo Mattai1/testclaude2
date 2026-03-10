@@ -1,10 +1,7 @@
 import { Navbar } from "@/components/navbar";
 import { Hero } from "@/components/hero";
-import { IDEPreview } from "@/components/ide-preview";
 import { MarqueeLogos } from "@/components/marquee-logos";
-import { Statement } from "@/components/statement";
-import { Features } from "@/components/features";
-import { CTASection } from "@/components/cta-section";
+import { EnterpriseSection } from "@/components/enterprise-section";
 import { Footer } from "@/components/footer";
 
 export default function Home() {
@@ -12,16 +9,8 @@ export default function Home() {
     <div className="min-h-screen bg-white text-black">
       <Navbar />
       <Hero />
-
-      {/* IDE Preview */}
-      <section className="py-16 md:py-24">
-        <IDEPreview />
-      </section>
-
       <MarqueeLogos />
-      <Statement />
-      <Features />
-      <CTASection />
+      <EnterpriseSection />
       <Footer />
     </div>
   );

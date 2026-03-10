@@ -1,51 +1,95 @@
 "use client";
 
-import { Apple, ArrowRight } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useInView } from "@/hooks/use-in-view";
-import { MochaLogo } from "./mocha-logo";
 
 export function CTASection() {
   const { ref, isInView } = useInView();
 
   return (
-    <section ref={ref} className="py-20 md:py-32 px-6">
+    <section className="relative bg-[#0a2540] py-24 px-6 overflow-hidden">
+      {/* Mesh gradient background layers */}
       <div
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-0 overflow-hidden"
+      >
+        {/* Top-left teal blob */}
+        <div
+          className="absolute -top-32 -left-32 w-[480px] h-[480px] rounded-full opacity-30"
+          style={{
+            background:
+              "radial-gradient(circle at center, #0e9eff 0%, transparent 70%)",
+            filter: "blur(80px)",
+          }}
+        />
+        {/* Bottom-right purple blob */}
+        <div
+          className="absolute -bottom-24 -right-24 w-[520px] h-[520px] rounded-full opacity-25"
+          style={{
+            background:
+              "radial-gradient(circle at center, #635bff 0%, transparent 65%)",
+            filter: "blur(90px)",
+          }}
+        />
+        {/* Center subtle green accent */}
+        <div
+          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[300px] opacity-10"
+          style={{
+            background:
+              "radial-gradient(ellipse at center, #059669 0%, transparent 70%)",
+            filter: "blur(60px)",
+          }}
+        />
+      </div>
+
+      {/* Content */}
+      <div
+        ref={ref}
         className={cn(
-          "max-w-4xl mx-auto text-center opacity-0",
-          isInView && "animate-mocha-scale-in"
+          "relative z-10 max-w-2xl mx-auto text-center opacity-0",
+          isInView && "animate-mocha-fade-in-up"
         )}
       >
-        <div className="relative rounded-3xl bg-gradient-to-br from-indigo-500/5 via-purple-500/5 to-pink-500/5 border border-black/[0.06] px-8 py-16 md:px-16 md:py-24 overflow-hidden">
-          {/* Decorative spinning gradient */}
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] rounded-full bg-[radial-gradient(ellipse,rgba(99,102,241,0.06),transparent_60%)] animate-mocha-spin-slow pointer-events-none" />
+        <h2 className="text-3xl md:text-5xl font-bold text-white mb-4 tracking-tight">
+          Ready to start building?
+        </h2>
+        <p className="text-[#adbdcc] text-lg leading-relaxed mb-10">
+          Join millions of businesses using Stripe to grow their revenue.
+        </p>
 
-          <div className="relative">
-            <MochaLogo className="w-12 h-12 mx-auto mb-6" />
-            <h2 className="text-3xl md:text-5xl font-medium tracking-tight mb-4">
-              Ready for liftoff?
-            </h2>
-            <p className="text-lg text-black/50 max-w-md mx-auto mb-10">
-              Join thousands of developers building the future with Mocha.
-            </p>
-            <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
-              <a
-                href="#download"
-                className="inline-flex items-center gap-2.5 bg-black text-white font-medium text-sm px-7 py-3.5 rounded-full hover:bg-black/85 active:scale-[0.97] transition-all duration-200 shadow-lg shadow-black/10 animate-mocha-pulse-glow"
-              >
-                <Apple className="w-4 h-4" />
-                Download for MacOS
-              </a>
-              <a
-                href="#docs"
-                className="inline-flex items-center gap-2 text-black/60 hover:text-black font-medium text-sm px-7 py-3.5 rounded-full hover:bg-black/5 transition-all duration-200 group"
-              >
-                Read the docs
-                <ArrowRight className="w-4 h-4 transition-transform duration-200 group-hover:translate-x-1" />
-              </a>
-            </div>
-          </div>
+        {/* Buttons */}
+        <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-8">
+          <a
+            href="#"
+            className={cn(
+              "inline-flex items-center justify-center",
+              "bg-[#635bff] text-white font-semibold text-sm",
+              "px-8 py-3.5 rounded-full",
+              "shadow-[0_6px_12px_-2px_rgba(50,50,93,.25),_0_3px_7px_-3px_rgba(0,0,0,.3)]",
+              "hover:bg-white hover:text-[#0a2540]",
+              "transition-all duration-150 ease-[cubic-bezier(0.215,0.61,0.355,1)]"
+            )}
+          >
+            Start now →
+          </a>
+          <a
+            href="#"
+            className={cn(
+              "inline-flex items-center justify-center",
+              "text-white font-semibold text-sm",
+              "px-8 py-3.5 rounded-full",
+              "hover:underline underline-offset-4",
+              "transition-all duration-150 ease-[cubic-bezier(0.215,0.61,0.355,1)]"
+            )}
+          >
+            Contact sales
+          </a>
         </div>
+
+        {/* Fine print */}
+        <p className="text-[#8c9eb1] text-xs tracking-wide">
+          14-day free trial &bull; No credit card required &bull; Cancel anytime
+        </p>
       </div>
     </section>
   );

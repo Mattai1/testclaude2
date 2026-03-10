@@ -2,6 +2,87 @@
 @import "tw-animate-css";
 @import "shadcn/tailwind.css";
 
+/* =========================================
+   STRIPE DESIGN TOKENS
+   ========================================= */
+:root {
+  /* Stripe Colors */
+  --stripe-navy: #0a2540;
+  --stripe-purple: #635bff;
+  --stripe-text: #425466;
+  --stripe-light: #f6f9fc;
+  --stripe-border: #e7ecf1;
+  --stripe-border-strong: #cbd6e0;
+  --stripe-annotation: #8c9eb1;
+  --stripe-card-bg: #fff;
+  --stripe-subcard: #f6f9fc;
+  --stripe-dark-card: #0c2e4e;
+  --stripe-dark-subcard: #1f4468;
+
+  /* Stripe Shadows */
+  --stripe-shadow-sm: 0 6px 12px -2px rgba(50,50,93,.25), 0 3px 7px -3px rgba(0,0,0,.3);
+  --stripe-shadow-md: 0 13px 27px -5px rgba(50,50,93,.25), 0 8px 16px -8px rgba(0,0,0,.3);
+  --stripe-shadow-lg: 0 30px 60px -12px rgba(50,50,93,.25), 0 18px 36px -18px rgba(0,0,0,.3);
+  --stripe-shadow-xl: 0 50px 100px -20px rgba(50,50,93,.25), 0 30px 60px -30px rgba(0,0,0,.3);
+  --stripe-shadow-nav: 0 30px 60px -50px rgba(0,0,0,.10), 0 30px 60px -10px rgba(50,50,93,.25);
+
+  /* Stripe Transitions */
+  --stripe-hover: 150ms cubic-bezier(0.215, 0.61, 0.355, 1);
+}
+
+/* Stripe animated gradient mesh for hero */
+@keyframes stripe-gradient-shift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* Stripe hover arrow animation */
+@keyframes stripe-arrow-in {
+  0% { transform: translateX(0); opacity: 1; }
+  100% { transform: translateX(4px); opacity: 1; }
+}
+
+/* Stripe card hover lift */
+.stripe-card-hover {
+  transition: transform var(--stripe-hover), box-shadow var(--stripe-hover);
+}
+.stripe-card-hover:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--stripe-shadow-md);
+}
+
+/* Stripe pill button */
+.stripe-btn-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 20px;
+  background: #635bff;
+  color: white;
+  border-radius: 20px;
+  font-weight: 500;
+  font-size: 15px;
+  line-height: 1.6;
+  transition: background var(--stripe-hover);
+  white-space: nowrap;
+}
+.stripe-btn-primary:hover { background: #0a2540; }
+
+.stripe-btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 20px;
+  color: #635bff;
+  border-radius: 20px;
+  font-weight: 500;
+  font-size: 15px;
+  line-height: 1.6;
+  transition: opacity var(--stripe-hover);
+}
+.stripe-btn-secondary:hover { opacity: 0.6; }
+
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {
