@@ -1,16 +1,16 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { ChevronDown, Download, Menu, X } from "lucide-react";
+import { Download, Menu, X } from "lucide-react";
 import { MochaLogo } from "./mocha-logo";
 import { cn } from "@/lib/utils";
 
 const navLinks = [
-  { label: "Product", href: "#product" },
-  { label: "Use Cases", href: "#use-cases", hasDropdown: true },
-  { label: "Pricing", href: "#pricing" },
-  { label: "Blog", href: "#blog" },
-  { label: "Resources", href: "#resources", hasDropdown: true },
+  { label: "Features", href: "/features" },
+  { label: "Pricing", href: "/pricing" },
+  { label: "Changelog", href: "/changelog" },
+  { label: "Blog", href: "/blog" },
+  { label: "Docs", href: "/docs" },
 ];
 
 export function Navbar() {
@@ -50,9 +50,6 @@ export function Navbar() {
               className="flex items-center gap-1 px-3.5 py-2 text-sm text-black/60 hover:text-black transition-colors duration-200 rounded-lg hover:bg-black/[0.04]"
             >
               {link.label}
-              {link.hasDropdown && (
-                <ChevronDown className="w-3.5 h-3.5 opacity-40" />
-              )}
             </a>
           ))}
         </div>
@@ -60,7 +57,7 @@ export function Navbar() {
         {/* Download Button */}
         <div className="hidden md:flex items-center">
           <a
-            href="#download"
+            href="/pricing"
             className="inline-flex items-center gap-2 bg-black text-white text-sm font-medium px-5 py-2 rounded-full hover:bg-black/85 active:scale-[0.97] transition-all duration-200"
           >
             Download
@@ -93,13 +90,10 @@ export function Navbar() {
               onClick={() => setMobileOpen(false)}
             >
               {link.label}
-              {link.hasDropdown && (
-                <ChevronDown className="w-3.5 h-3.5 opacity-50" />
-              )}
             </a>
           ))}
           <a
-            href="#download"
+            href="/pricing"
             className="flex items-center justify-center gap-2 bg-black text-white text-sm font-medium px-5 py-2.5 rounded-full mt-3"
           >
             Download
